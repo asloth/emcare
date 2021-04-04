@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
           title: 'EmCare',
           home: Text('Loading'),
         );
-        ;
       },
     );
   }
