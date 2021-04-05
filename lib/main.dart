@@ -1,3 +1,4 @@
+import 'package:emcare/constants.dart';
 import 'package:emcare/src/presentation/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 // Import the firebase_core plugin
@@ -34,9 +35,13 @@ class MyApp extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return MaterialApp(
-          title: 'EmCare',
-          home: Text('Loading'),
+        return Container(
+          color: kPrimaryColor,
+          child: Center(
+            child: CircularProgressIndicator(
+              backgroundColor: kPrimaryColor,
+            ),
+          ),
         );
       },
     );
