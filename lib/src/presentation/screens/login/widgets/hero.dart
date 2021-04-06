@@ -15,10 +15,8 @@ class LoginHero extends StatelessWidget {
         horizontal: 30,
         vertical: 20,
       ),
-      child: FittedBox(
-        child: SvgPicture.asset(
-          assetdir,
-        ),
+      child: SvgPicture.asset(
+        assetdir,
       ),
     );
   }

@@ -40,19 +40,19 @@ class LoginBody extends StatelessWidget {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(
-                        height: size.width * 0.8,
-                        width: size.width,
+                      Flexible(
+                        flex: 2,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: FittedBox(
-                            child: SvgPicture.asset(
-                              'assets/imgs/note_taking_isometric.svg',
-                            ),
+                          child: SvgPicture.asset(
+                            'assets/imgs/note_taking_isometric.svg',
                           ),
                         ),
                       ),
-                      SignUpForm(),
+                      Flexible(
+                        flex: 4,
+                        child: SignUpForm(),
+                      ),
                     ],
                   )
                 : Row(
