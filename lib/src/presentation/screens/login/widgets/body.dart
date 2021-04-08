@@ -9,60 +9,81 @@ class LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: PageView(
         children: [
-          Container(
-            child: orientation == Orientation.portrait
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      LoginHero(
-                        assetdir: 'assets/imgs/welcome.svg',
-                      ),
-                      SignInForm(),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      LoginHero(
-                        assetdir: 'assets/imgs/welcome.svg',
-                      ),
-                      SignInForm(),
-                    ],
-                  ),
-          ),
-          Container(
-            child: orientation == Orientation.portrait
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(
-                            'assets/imgs/note_taking_isometric.svg',
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 4,
-                        child: SignUpForm(),
-                      ),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      Text('Aqui para registrarte en horizontal reina')
-                    ],
-                  ),
-          )
+          SignInBody(),
+          SignUpBody(),
         ],
       ),
+    );
+  }
+}
+
+class SignInBody extends StatelessWidget {
+  const SignInBody({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
+
+    return Container(
+      child: orientation == Orientation.portrait
+          ? SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  LoginHero(
+                    assetdir: 'assets/imgs/welcome.svg',
+                  ),
+                  SignInForm(),
+                ],
+              ),
+            )
+          : Row(
+              children: [
+                LoginHero(
+                  assetdir: 'assets/imgs/welcome.svg',
+                ),
+                SignInForm(),
+              ],
+            ),
+    );
+  }
+}
+
+class SignUpBody extends StatelessWidget {
+  const SignUpBody({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
+
+    return Container(
+      child: orientation == Orientation.portrait
+          ? SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset(
+                      'assets/imgs/note_taking_isometric.svg',
+                    ),
+                  ),
+                  SignUpForm(),
+                ],
+              ),
+            )
+          : Row(
+              children: [Text('Aqui para registrarte en horizontal reina')],
+            ),
     );
   }
 }

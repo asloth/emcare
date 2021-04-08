@@ -7,7 +7,9 @@ class AuthService {
     this._auth,
   );
 
-  Stream<User> get authStateChanges => _auth.authStateChanges();
+  Stream<User> get authStateChanges {
+    return _auth.authStateChanges();
+  }
 
   Future<String> signIn({String email, String password}) async {
     try {
@@ -22,15 +24,31 @@ class AuthService {
     await _auth.signOut();
   }
 
-  Future<String> signUp({String email, String password}) async {
+  Future<String> signUp({
+    String email,
+    String password,
+    String username,
+  }) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      User updateUser = _auth.currentUser;
+      updateUser.updateProfile(
+        displayName: username,
+      );
       return 'Signed up';
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      if (e.code == 'weak-password') {
+        return 'La contraseña ingresada es muy débil';
+      } else if (e.code == 'email-already-in-use') {
+        return 'El correo ingresado ya está en uso';
+      }
+    } catch (e) {
+      return e.toString();
     }
+
+    return '0';
   }
 }

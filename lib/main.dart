@@ -1,8 +1,12 @@
 import 'package:emcare/constants.dart';
+import 'package:emcare/src/domain/auth_service.dart';
+import 'package:emcare/src/presentation/screens/home/home_screen.dart';
 import 'package:emcare/src/presentation/screens/login/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +34,20 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
             title: 'EmCare',
-            home: LogIn(),
+            home: MultiProvider(
+              providers: [
+                Provider(create: (_) => AuthService(FirebaseAuth.instance)),
+                StreamProvider(
+                  create: (context) =>
+                      context.read<AuthService>().authStateChanges,
+                  initialData: null,
+                )
+              ],
+              child: MaterialApp(
+                title: 'EmCare',
+                home: AuthenticationWrapper(),
+              ),
+            ),
           );
         }
 
@@ -38,12 +55,24 @@ class MyApp extends StatelessWidget {
         return Container(
           color: kPrimaryColor,
           child: Center(
-            child: CircularProgressIndicator(
-              backgroundColor: kPrimaryColor,
-            ),
+            child: CircularProgressIndicator(),
           ),
         );
       },
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  const AuthenticationWrapper({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      return Home();
+    }
+    return LogIn();
   }
 }
