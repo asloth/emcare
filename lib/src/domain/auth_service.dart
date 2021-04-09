@@ -13,11 +13,20 @@ class AuthService {
 
   Future<String> signIn({String email, String password}) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return 'Signed in';
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      if (e.code == 'wrong-password') {
+        return 'Contraseña errónea';
+      } else if (e.code == 'invalid-email') {
+        return 'Correo no válido';
+      } else if (e.code == 'user-not-found') {
+        return 'Usuario no encontrado, si no tiene una cuenta por favor regístrese';
+      }
     }
+    return '0';
   }
 
   Future<void> signOut() async {

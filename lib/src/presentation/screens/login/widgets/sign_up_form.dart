@@ -1,5 +1,6 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
+import 'package:emcare/src/presentation/components/custom-alert-dialog.dart';
 import 'package:emcare/src/presentation/components/input_field.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/already_have_an_account_check.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/title.dart';
@@ -28,23 +29,8 @@ class _SignUpFormState extends State<SignUpForm> {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Información'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text(aviso),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Entendido'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+          return CustomAlertDialog(
+            aviso: aviso,
           );
         },
       );

@@ -49,7 +49,9 @@ class SignInBody extends StatelessWidget {
                 LoginHero(
                   assetdir: 'assets/imgs/welcome.svg',
                 ),
-                SignInForm(),
+                Flexible(
+                  child: SignInForm(),
+                ),
               ],
             ),
     );
@@ -63,27 +65,23 @@ class SignUpBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
+    //final orientation = MediaQuery.of(context).orientation;
 
     return Container(
-      child: orientation == Orientation.portrait
-          ? SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/imgs/note_taking_isometric.svg',
-                    ),
-                  ),
-                  SignUpForm(),
-                ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                'assets/imgs/note_taking_isometric.svg',
               ),
-            )
-          : Row(
-              children: [Text('Aqui para registrarte en horizontal reina')],
             ),
+            SignUpForm(),
+          ],
+        ),
+      ),
     );
   }
 }
