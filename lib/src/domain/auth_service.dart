@@ -17,6 +17,7 @@ class AuthService {
         email: email,
         password: password,
       );
+      return 'Signed in';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
         return 'Contraseña errónea';
@@ -24,9 +25,10 @@ class AuthService {
         return 'Correo no válido';
       } else if (e.code == 'user-not-found') {
         return 'Usuario no encontrado, si no tiene una cuenta por favor regístrese';
+      } else {
+        return 'ninguna opcion gilasa';
       }
     }
-    return '0';
   }
 
   Future<void> signOut() async {
@@ -44,7 +46,8 @@ class AuthService {
         password: password,
       );
       User updateUser = _auth.currentUser;
-      updateUser.updateProfile(
+      await updateUser.sendEmailVerification();
+      await updateUser.updateProfile(
         displayName: username,
       );
       return 'Signed up';

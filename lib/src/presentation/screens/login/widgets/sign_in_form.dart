@@ -1,5 +1,6 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
+import 'package:emcare/src/presentation/components/custom-alert-dialog.dart';
 import 'package:emcare/src/presentation/components/input_field.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/already_have_an_account_check.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/title.dart';
@@ -23,6 +24,17 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     //Size size = MediaQuery.of(context).size;
+    Future<void> _showMyDialog(String aviso) async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return CustomAlertDialog(
+            aviso: aviso,
+          );
+        },
+      );
+    }
 
     return Form(
       key: _formKey,
@@ -63,10 +75,15 @@ class _SignInFormState extends State<SignInForm> {
                 onPressed: () => {
                   if (_formKey.currentState.validate())
                     {
-                      context.read<AuthService>().signIn(
+                      context
+                          .read<AuthService>()
+                          .signIn(
                             email: emailController.text.trim(),
                             password: passwordController.text.trim(),
                           )
+                          .then((value) => {
+                                if (value != 'Signed in') {_showMyDialog(value)}
+                              })
                     }
                 },
                 child: Text(
