@@ -28,6 +28,9 @@ dependencies:
   firebase_core: 0.7.0
   flutter_svg: ^0.19.3
   provider: ^5.0.0
+  bubble: ^1.2.1
+  intl: ^0.16.1
+  hidden_drawer_menu: ^2.0.1
 
 dev_dependencies:
   flutter_test:
