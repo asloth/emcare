@@ -23,14 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  bubble: ^1.2.1
   cupertino_icons: ^1.0.2
   firebase_auth: ^0.20.1
   firebase_core: 0.7.0
   flutter_svg: ^0.19.3
-  provider: ^5.0.0
-  bubble: ^1.2.1
-  intl: ^0.16.1
   hidden_drawer_menu: ^2.0.1
+  intl: ^0.16.1
+  provider: ^5.0.0
+  dialog_flowtter: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
   assets:
     - assets/imgs/
     - assets/icons/
+    - assets/df_service.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
