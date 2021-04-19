@@ -31,39 +31,35 @@ class Messages extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Bubble(
-                radius: Radius.circular(15.0),
-                color: data == 0
-                    ? Color.fromRGBO(23, 157, 139, 1)
-                    : Colors.orangeAccent,
-                elevation: 0.0,
-                child: Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 10.0,
+              nip: data == 0 ? BubbleNip.leftTop : BubbleNip.rightTop,
+              radius: Radius.circular(15.0),
+              color: data == 0
+                  ? Color.fromRGBO(23, 157, 139, 1)
+                  : Colors.orangeAccent,
+              elevation: 0.0,
+              child: Padding(
+                padding: EdgeInsets.all(2.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Flexible(
+                        child: Container(
+                      constraints: BoxConstraints(maxWidth: 200),
+                      child: Text(
+                        textmessage,
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                      Flexible(
-                          child: Container(
-                        constraints: BoxConstraints(maxWidth: 200),
-                        child: Text(
-                          textmessage,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ))
-                    ],
-                  ),
-                )),
+                    ))
+                  ],
+                ),
+              ),
+            ),
           ),
-          data == 1
-              ? Container(
-                  height: 60,
-                  width: 60,
-                  child: CircleAvatar(),
-                )
-              : Container(),
+          data == 1 ? Container() : Container(),
         ],
       ),
     );
