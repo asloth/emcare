@@ -2,7 +2,6 @@ import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/presentation/screens/chat/widgets/message.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class Chat extends StatefulWidget {
@@ -32,11 +31,14 @@ class _ChatState extends State<Chat> {
         ),
       ),
     );
+    List<Message> qresult = response.queryResult.fulfillmentMessages;
 
     setState(() {
-      messsages.insert(0, {
-        "data": 0,
-        "message": response.text,
+      qresult.forEach((element) {
+        messsages.insert(0, {
+          "data": 0,
+          "message": element.text.text.first,
+        });
       });
     });
   }

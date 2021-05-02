@@ -25,13 +25,14 @@ dependencies:
     sdk: flutter
   bubble: ^1.2.1
   cupertino_icons: ^1.0.2
+  dialog_flowtter: ^0.2.0
   firebase_auth: ^0.20.1
   firebase_core: 0.7.0
   flutter_svg: ^0.19.3
   hidden_drawer_menu: ^2.0.1
+  http: ^0.12.2
   intl: ^0.16.1
   provider: ^5.0.0
-  dialog_flowtter: ^0.2.0
 
 dev_dependencies:
   flutter_test:
