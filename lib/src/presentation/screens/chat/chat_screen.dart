@@ -1,7 +1,8 @@
-import 'package:dialog_flowtter/dialog_flowtter.dart';
+import 'dart:convert';
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/presentation/screens/chat/widgets/message.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class Chat extends StatefulWidget {
@@ -16,28 +17,20 @@ class _ChatState extends State<Chat> {
   List<Map> messsages = [];
 
   void response(query) async {
-    DialogAuthCredentials credentials =
-        await DialogAuthCredentials.fromFile("assets/df_service.json");
-
-    DialogFlowtter instance = DialogFlowtter(
-      credentials: credentials,
+    var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/dialog');
+    var response = await http.post(
+      url,
+      body: {
+        'message': query,
+      },
     );
-
-    DetectIntentResponse response = await instance.detectIntent(
-      queryInput: QueryInput(
-        text: TextInput(
-          text: query,
-          languageCode: "es",
-        ),
-      ),
-    );
-    List<Message> qresult = response.queryResult.fulfillmentMessages;
+    List qresult = json.decode(response.body);
 
     setState(() {
       qresult.forEach((element) {
         messsages.insert(0, {
           "data": 0,
-          "message": element.text.text.first,
+          "message": element['text']['text'][0],
         });
       });
     });
