@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/presentation/screens/chat/widgets/message.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class Chat extends StatefulWidget {
   const Chat({Key key}) : super(key: key);
@@ -15,17 +17,45 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   final messageInsert = TextEditingController();
   List<Map> messsages = [];
+  bool flag = false;
 
   void response(query) async {
+    List qresult = await getResponse(query);
+    if (qresult.first['intentDisplayName'] == 'SegundaPregunta') {
+      setState(() {
+        flag = true;
+      });
+    }
+    printMessages(qresult);
+  }
+
+  void setFeeling(List<Map> messages, userid) async {
+    var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/ibm');
+    var response = await http.post(
+      url,
+      body: {
+        'message': messages,
+        'userid': userid,
+      },
+    ).catchError((e) => {
+          print(e.toString()),
+        });
+    print(response);
+  }
+
+  Future<List> getResponse(queryText) async {
     var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/dialog');
     var response = await http.post(
       url,
       body: {
-        'message': query,
+        'message': queryText,
       },
     );
     List qresult = json.decode(response.body);
+    return qresult;
+  }
 
+  void printMessages(qresult) {
     setState(() {
       qresult.forEach((element) {
         messsages.insert(0, {
@@ -38,6 +68,8 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Container(
@@ -101,7 +133,15 @@ class _ChatState extends State<Chat> {
                       messsages.insert(
                           0, {"data": 1, "message": messageInsert.text});
                     });
-                    response(messageInsert.text);
+                    if (flag) {
+                      response('auto');
+                      setFeeling(messsages, firebaseUser.uid);
+                      setState(() {
+                        flag = false;
+                      });
+                    } else {
+                      response(messageInsert.text);
+                    }
                     messageInsert.clear();
                   }
                   FocusScopeNode currentFocus = FocusScope.of(context);
