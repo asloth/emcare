@@ -29,17 +29,23 @@ class _ChatState extends State<Chat> {
     printMessages(qresult);
   }
 
-  void setFeeling(List<Map> messages, userid) async {
+  Future<void> setFeeling(List<Map> messages, userId) async {
+    String userMessages = "";
+    for (var e in messages) {
+      if (e['data'] == 1) {
+        userMessages += e['message'];
+        userMessages += ". ";
+      }
+    }
+
     var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/ibm');
     var response = await http.post(
       url,
       body: {
-        'message': messages,
-        'userid': userid,
+        'message': userMessages,
+        'userid': userId,
       },
-    ).catchError((e) => {
-          print(e.toString()),
-        });
+    );
     print(response);
   }
 
