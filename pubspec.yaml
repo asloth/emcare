@@ -32,6 +32,7 @@ dependencies:
   http: ^0.12.2
   intl: ^0.16.1
   provider: ^5.0.0
+  charts_flutter: ^0.10.0
 
 dev_dependencies:
   flutter_test:

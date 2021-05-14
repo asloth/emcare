@@ -1,5 +1,7 @@
+import 'package:emcare/src/data/menu_items_data.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/perfil/perfil_screen.dart';
+import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/model/item_hidden_menu.dart';
@@ -18,8 +20,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     items.add(
-      new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
           name: "EmCare Bot",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
@@ -30,14 +32,28 @@ class _HomeState extends State<Home> {
     );
 
     items.add(
-      new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
           name: "Perfil",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
         ),
         Perfil(),
+      ),
+    );
+
+    items.add(
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+          name: "Estadísticas",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.teal,
+        ),
+        Stadistics(
+          data: data,
+        ),
       ),
     );
 
