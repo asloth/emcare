@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
 
         // Otherwise, show something whilst waiting for initialization to complete
         return Container(
-          color: kPrimaryColor,
+          color: kBackgroundColor,
           child: Center(
             child: CircularProgressIndicator(),
           ),
