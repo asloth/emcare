@@ -19,7 +19,7 @@ class StackedAreaLineChart extends StatelessWidget {
 /// Sample linear data type.
 class LinearSales {
   final int year;
-  final int sales;
+  final num sales;
 
   LinearSales(this.year, this.sales);
 }

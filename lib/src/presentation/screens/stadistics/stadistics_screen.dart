@@ -4,7 +4,6 @@ import 'package:emcare/src/domain/feelings_today_stadistics.dart';
 import 'package:emcare/src/presentation/screens/stadistics/widgets/stacked_area_line_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class Stadistics extends StatelessWidget {
@@ -13,8 +12,9 @@ class Stadistics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-    final Future<Response> res = getFeelings(firebaseUser.uid);
-    final List<charts.Series> data = createSampleData();
+    final Future<List> res = getFeelings(firebaseUser.uid);
+    List<charts.Series> data;
+    res.then((value) => {data = createSampleData(value)});
     return FutureBuilder(
       future: res,
       builder: (context, snapshot) {
