@@ -15,7 +15,7 @@ Future<List> getFeelings(String userid) async {
     },
   );
   List res = await json.decode(response.body);
-
+  print(res);
   return res;
 }
 
@@ -30,25 +30,32 @@ class Tone {
 }
 
 List<charts.Series<LinearSales, int>> createSampleData(List response) {
+  for (var e in response) {
+    Map element = Map.from(e);
+    print(element['date']);
+    print(element['sentiment']['document_tone']['tones']);
+  }
+
+  // var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
   final felicidad = [
     new LinearSales(0, 5),
-    new LinearSales(0, 3),
-    new LinearSales(0, 2),
+    new LinearSales(3, 3),
+    new LinearSales(7, 2),
   ];
 
   var tristeza = [
     new LinearSales(0, 10),
-    new LinearSales(0, 10),
+    new LinearSales(56, 3),
   ];
 
   var enojo = [
     new LinearSales(0, 15),
-    new LinearSales(0, 15),
+    new LinearSales(7, 56),
   ];
 
   var miedo = [
-    new LinearSales(0, 14.0212),
-    new LinearSales(0, 14.0212),
+    new LinearSales(8, 14.0212),
+    new LinearSales(9, 200),
   ];
 
   return [
