@@ -51,9 +51,7 @@ class _HomeState extends State<Home> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
         ),
-        Stadistics(
-          data: data,
-        ),
+        Stadistics(),
       ),
     );
 

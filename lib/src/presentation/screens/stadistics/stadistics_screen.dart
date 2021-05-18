@@ -1,30 +1,20 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/feelings_today_stadistics.dart';
+import 'package:emcare/src/presentation/screens/stadistics/widgets/stacked_area_line_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class Stadistics extends StatelessWidget {
-  const Stadistics({Key key, @required this.data}) : super(key: key);
-
-  final List<TodayFeelings> data;
+  const Stadistics({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
     final Future<Response> res = getFeelings(firebaseUser.uid);
-
-    List<charts.Series<TodayFeelings, String>> series = [
-      charts.Series(
-          id: "Price",
-          data: data,
-          domainFn: (TodayFeelings series, _) => series.month,
-          measureFn: (TodayFeelings series, _) => series.price,
-          colorFn: (TodayFeelings series, _) => series.barColor),
-    ];
-
+    final List<charts.Series> data = createSampleData();
     return FutureBuilder(
       future: res,
       builder: (context, snapshot) {
@@ -54,7 +44,7 @@ class Stadistics extends StatelessWidget {
                               "Bitcoin price from Jan to March (2021) ",
                             ),
                             Expanded(
-                              child: (charts.BarChart(series, animate: true)),
+                              child: StackedAreaLineChart(data),
                             )
                           ],
                         ),

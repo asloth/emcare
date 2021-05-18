@@ -46,7 +46,7 @@ class _ChatState extends State<Chat> {
         'userid': userId,
       },
     );
-    print(response);
+    print(response.body);
   }
 
   Future<List> getResponse(queryText) async {
