@@ -1,4 +1,3 @@
-import 'package:emcare/src/data/menu_items_data.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/perfil/perfil_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';

@@ -1,8 +1,5 @@
 import 'dart:convert';
-
-import 'package:emcare/src/presentation/screens/stadistics/widgets/stacked_area_line_chart.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 Future<List> getFeelings(String userid) async {
@@ -15,77 +12,66 @@ Future<List> getFeelings(String userid) async {
     },
   );
   List res = await json.decode(response.body);
-  print(res);
   return res;
 }
 
 /// Sample linear data type.
 class Tone {
-  final String toneId;
   final String toneName;
   final num score;
-  final int hour;
 
-  Tone(this.toneId, this.toneName, this.score, this.hour);
+  Tone(this.toneName, this.score);
 }
 
-List<charts.Series<LinearSales, int>> createSampleData(List response) {
+List<charts.Series<Tone, String>> createSampleData(List response) {
+  List<Tone> hapiness = [];
+
+  List<Tone> sadness = [];
+
+  List<Tone> anger = [];
+
+  List<Tone> fear = [];
+
   for (var e in response) {
     Map element = Map.from(e);
-    print(element['date']);
-    print(element['sentiment']['document_tone']['tones']);
+    var tones = element['sentiment']['document_tone']['tones'];
+    for (var t in tones) {
+      if (t['tone_id'] == 'sadness') {
+        sadness.add(new Tone('Tristeza', t['score']));
+      } else if (t['tone_id'] == 'hapiness') {
+        hapiness.add(new Tone('Felicidad', t['score']));
+      } else if (t['tone_id'] == 'anger') {
+        anger.add(new Tone('Enojo', t['score']));
+      } else if (t['tone_id'] == 'fear') {
+        fear.add(new Tone('Miedo', t['score']));
+      }
+    }
   }
 
-  // var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-  final felicidad = [
-    new LinearSales(0, 5),
-    new LinearSales(3, 3),
-    new LinearSales(7, 2),
-  ];
-
-  var tristeza = [
-    new LinearSales(0, 10),
-    new LinearSales(56, 3),
-  ];
-
-  var enojo = [
-    new LinearSales(0, 15),
-    new LinearSales(7, 56),
-  ];
-
-  var miedo = [
-    new LinearSales(8, 14.0212),
-    new LinearSales(9, 200),
-  ];
-
   return [
-    new charts.Series<LinearSales, int>(
+    new charts.Series<Tone, String>(
       id: 'Felicidad',
-      colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-      domainFn: (LinearSales sales, _) => sales.year,
-      measureFn: (LinearSales sales, _) => sales.sales,
-      data: felicidad,
+      domainFn: (Tone tone, _) => tone.toneName,
+      measureFn: (Tone tone, _) => tone.score,
+      data: hapiness,
     ),
-    new charts.Series<LinearSales, int>(
+    new charts.Series<Tone, String>(
       id: 'Tristeza',
-      colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-      domainFn: (LinearSales sales, _) => sales.year,
-      measureFn: (LinearSales sales, _) => sales.sales,
-      data: tristeza,
+      domainFn: (Tone tone, _) => tone.toneName,
+      measureFn: (Tone tone, _) => tone.score,
+      data: sadness,
     ),
-    new charts.Series<LinearSales, int>(
+    new charts.Series<Tone, String>(
       id: 'Enojo',
-      colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-      domainFn: (LinearSales sales, _) => sales.year,
-      measureFn: (LinearSales sales, _) => sales.sales,
-      data: enojo,
+      domainFn: (Tone tone, _) => tone.toneName,
+      measureFn: (Tone tone, _) => tone.score,
+      data: anger,
     ),
-    new charts.Series<LinearSales, int>(
+    new charts.Series<Tone, String>(
       id: 'Miedo',
-      colorFn: (_, __) => charts.MaterialPalette.deepOrange.shadeDefault,
-      domainFn: (LinearSales sales, _) => sales.year,
-      measureFn: (LinearSales sales, _) => sales.sales,
-      data: miedo,
+      domainFn: (Tone tone, _) => tone.toneName,
+      measureFn: (Tone tone, _) => tone.score,
+      data: fear,
     ),
   ];
 }

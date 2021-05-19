@@ -1,7 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/feelings_today_stadistics.dart';
-import 'package:emcare/src/presentation/screens/stadistics/widgets/stacked_area_line_chart.dart';
+import 'package:emcare/src/presentation/screens/stadistics/widgets/grouped_bar_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +41,10 @@ class Stadistics extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              "Bitcoin price from Jan to March (2021) ",
+                              "Emociones detectadas hoy",
                             ),
                             Expanded(
-                              child: StackedAreaLineChart(data),
+                              child: GroupedBarChart(data),
                             )
                           ],
                         ),
