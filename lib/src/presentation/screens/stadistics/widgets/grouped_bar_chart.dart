@@ -9,10 +9,28 @@ class GroupedBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.BarChart(
-      seriesList,
-      animate: animate,
-      barGroupingType: charts.BarGroupingType.grouped,
+    return Container(
+      height: 400,
+      padding: EdgeInsets.all(20),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(
+                "Emociones detectadas hoy",
+              ),
+              Expanded(
+                child: new charts.BarChart(
+                  seriesList,
+                  animate: animate,
+                  barGroupingType: charts.BarGroupingType.grouped,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
