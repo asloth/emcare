@@ -28,7 +28,6 @@ class UserTone {
         } else if (t['tone_id'] == 'fear') {
           fear.add(new UserTone(eDate, t['score']));
         }
-        ;
       }
     }
 
