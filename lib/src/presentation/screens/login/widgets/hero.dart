@@ -13,7 +13,7 @@ class LoginHero extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 30,
-        vertical: 20,
+        vertical: 10,
       ),
       child: SvgPicture.asset(
         assetdir,

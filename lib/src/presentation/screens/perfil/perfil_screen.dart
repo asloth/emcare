@@ -1,3 +1,4 @@
+import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
 import 'package:emcare/src/presentation/components/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +13,7 @@ class Perfil extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       body: Container(
         child: Column(
           children: [

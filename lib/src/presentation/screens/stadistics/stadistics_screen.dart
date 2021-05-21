@@ -35,6 +35,7 @@ class Stadistics extends StatelessWidget {
 
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
+            backgroundColor: kBackgroundColor,
             body: SingleChildScrollView(
               child: Container(
                 child: Column(

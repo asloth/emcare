@@ -12,15 +12,18 @@ class LoginTitle extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
+      height: size.height * 0.07,
       padding: EdgeInsets.symmetric(
         vertical: 10,
       ),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: size.height * 0.05,
-          fontWeight: FontWeight.bold,
+      child: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
