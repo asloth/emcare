@@ -142,17 +142,26 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                 ),
                 onPressed: () => {
-                  if (_formKey.currentState.validate())
+                  if (isCompromiseChecked && isPrivacyPolicyChecked)
                     {
-                      context
-                          .read<AuthService>()
-                          .signUp(
-                            email: newEmailController.text.trim(),
-                            password: newPasswordController.text.trim(),
-                          )
-                          .then((value) => {
-                                if (value != 'Signed up') {_showMyDialog(value)}
-                              })
+                      if (_formKey.currentState.validate())
+                        {
+                          context
+                              .read<AuthService>()
+                              .signUp(
+                                email: newEmailController.text.trim(),
+                                password: newPasswordController.text.trim(),
+                              )
+                              .then((value) => {
+                                    if (value != 'Signed up')
+                                      {_showMyDialog(value)}
+                                  })
+                        }
+                    }
+                  else
+                    {
+                      _showMyDialog(
+                          'Por favor lea y acepte el Compromiso de usuario y las Políticas de privacidad para poder registrarse')
                     }
                 },
                 child: Text(

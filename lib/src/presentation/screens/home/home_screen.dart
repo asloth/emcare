@@ -1,3 +1,4 @@
+import 'package:emcare/constants.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/perfil/perfil_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
@@ -15,16 +16,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<ScreenHiddenDrawer> items = [];
-
+  final fontS = 25.0;
   @override
   void initState() {
     items.add(
       ScreenHiddenDrawer(
         ItemHiddenMenu(
           name: "EmCare Bot",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.teal,
+          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
+          colorLineSelected: kPrimaryColor,
         ),
         Chat(),
       ),
@@ -33,24 +33,22 @@ class _HomeState extends State<Home> {
     items.add(
       ScreenHiddenDrawer(
         ItemHiddenMenu(
-          name: "Perfil",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.teal,
+          name: "Estadísticas",
+          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
+          colorLineSelected: kPrimaryColor,
         ),
-        Perfil(),
+        Stadistics(),
       ),
     );
 
     items.add(
       ScreenHiddenDrawer(
         ItemHiddenMenu(
-          name: "Estadísticas",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.teal,
+          name: "Perfil",
+          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
+          colorLineSelected: kPrimaryColor,
         ),
-        Stadistics(),
+        Perfil(),
       ),
     );
 
@@ -60,8 +58,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
-      backgroundColorMenu: Colors.blueGrey,
-      backgroundColorAppBar: Colors.cyan,
+      backgroundColorMenu: kSecondColor,
+      backgroundColorAppBar: kPrimaryColor,
       screens: items,
       //    typeOpen: TypeOpen.FROM_RIGHT,
       //    disableAppBarDefault: false,
