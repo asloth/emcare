@@ -82,7 +82,7 @@ class _ChatState extends State<Chat> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 15, bottom: 10),
+              padding: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
                 "Hoy, ${DateFormat("Hm").format(DateTime.now())}",
                 style: TextStyle(fontSize: 20),

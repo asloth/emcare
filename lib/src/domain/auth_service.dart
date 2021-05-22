@@ -41,15 +41,17 @@ class AuthService {
     String username,
   }) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      User updateUser = _auth.currentUser;
-      await updateUser.sendEmailVerification();
-      await updateUser.updateProfile(
-        displayName: username,
-      );
+      await _auth
+          .createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          )
+          .then(
+            (value) => value.user.updateProfile(
+              displayName: username,
+            ),
+          );
+
       return 'Signed up';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
