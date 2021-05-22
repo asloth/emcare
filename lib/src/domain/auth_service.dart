@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
 class AuthService {
   final FirebaseAuth _auth;
@@ -11,7 +12,10 @@ class AuthService {
     return _auth.authStateChanges();
   }
 
-  Future<String> signIn({String email, String password}) async {
+  Future<String> signIn({
+    String email,
+    String password,
+  }) async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
@@ -46,11 +50,9 @@ class AuthService {
             email: email,
             password: password,
           )
-          .then(
-            (value) => value.user.updateProfile(
-              displayName: username,
-            ),
-          );
+          .then((value) => {
+                _setUser(value.user.uid, username),
+              });
 
       return 'Signed up';
     } on FirebaseAuthException catch (e) {
@@ -64,5 +66,23 @@ class AuthService {
     }
 
     return '0';
+  }
+
+  Future<void> _setUser(String uid, String userName) async {
+    print(uid);
+    print(userName);
+    try {
+      var url =
+          Uri.parse('https://emcare-expressjs-api.herokuapp.com/new-user');
+      await http.post(
+        url,
+        body: {
+          'userid': uid,
+          'username': userName,
+        },
+      );
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

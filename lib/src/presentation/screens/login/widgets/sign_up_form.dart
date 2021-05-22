@@ -151,6 +151,7 @@ class _SignUpFormState extends State<SignUpForm> {
                               .signUp(
                                 email: newEmailController.text.trim(),
                                 password: newPasswordController.text.trim(),
+                                username: newNameController.text.trim(),
                               )
                               .then((value) => {
                                     if (value != 'Signed up')
