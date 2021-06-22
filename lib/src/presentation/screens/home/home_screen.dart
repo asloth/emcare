@@ -1,4 +1,5 @@
 import 'package:emcare/constants.dart';
+import 'package:emcare/src/presentation/screens/analysis/analysis_screen.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/perfil/perfil_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
@@ -38,6 +39,17 @@ class _HomeState extends State<Home> {
           colorLineSelected: kPrimaryColor,
         ),
         Stadistics(),
+      ),
+    );
+
+    items.add(
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+          name: "Análisis",
+          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
+          colorLineSelected: kPrimaryColor,
+        ),
+        Analysis(),
       ),
     );
 

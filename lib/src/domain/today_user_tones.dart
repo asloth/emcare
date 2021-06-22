@@ -35,7 +35,7 @@ List<charts.Series<TodayUserTone, String>> createSampleData(List response) {
     for (var t in tones) {
       if (t['tone_id'] == 'sadness') {
         sadness.add(new TodayUserTone('Tristeza', t['score']));
-      } else if (t['tone_id'] == 'hapiness') {
+      } else if (t['tone_id'] == 'joy') {
         hapiness.add(new TodayUserTone('Felicidad', t['score']));
       } else if (t['tone_id'] == 'anger') {
         anger.add(new TodayUserTone('Enojo', t['score']));

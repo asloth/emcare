@@ -21,7 +21,7 @@ class UserTone {
       for (var t in tones) {
         if (t['tone_id'] == 'sadness') {
           sadness.add(new UserTone(eDate, t['score']));
-        } else if (t['tone_id'] == 'hapiness') {
+        } else if (t['tone_id'] == 'joy') {
           hapiness.add(new UserTone(eDate, t['score']));
         } else if (t['tone_id'] == 'anger') {
           anger.add(new UserTone(eDate, t['score']));
@@ -34,7 +34,7 @@ class UserTone {
     return [
       new charts.Series<UserTone, DateTime>(
         id: 'Felicidad',
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.yellow.shadeDefault,
         domainFn: (UserTone userTone, _) => userTone.time,
         measureFn: (UserTone userTone, _) => userTone.score,
         data: hapiness,
