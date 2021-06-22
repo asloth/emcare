@@ -1,4 +1,3 @@
-import 'package:emcare/constants.dart';
 import 'package:flutter/material.dart';
 
 class TendencyLabel extends StatelessWidget {
