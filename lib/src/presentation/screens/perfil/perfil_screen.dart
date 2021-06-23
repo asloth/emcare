@@ -15,7 +15,9 @@ class Perfil extends StatelessWidget {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Container(
+        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text('Hola ' + firebaseUser.email),
             Spacer(),

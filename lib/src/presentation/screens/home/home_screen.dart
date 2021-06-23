@@ -1,12 +1,13 @@
 import 'package:emcare/constants.dart';
+import 'package:emcare/src/domain/auth_service.dart';
 import 'package:emcare/src/presentation/screens/analysis/analysis_screen.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
-import 'package:emcare/src/presentation/screens/perfil/perfil_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/model/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/model/screen_hidden_drawer.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -53,16 +54,16 @@ class _HomeState extends State<Home> {
       ),
     );
 
-    items.add(
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-          name: "Perfil",
-          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
-          colorLineSelected: kPrimaryColor,
-        ),
-        Perfil(),
-      ),
-    );
+    // items.add(
+    //   ScreenHiddenDrawer(
+    //     ItemHiddenMenu(
+    //       name: "Perfil",
+    //       baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
+    //       colorLineSelected: kPrimaryColor,
+    //     ),
+    //     Perfil(),
+    //   ),
+    // );
 
     super.initState();
   }
@@ -84,7 +85,19 @@ class _HomeState extends State<Home> {
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       //    whithAutoTittleName: true,
       //    styleAutoTittleName: TextStyle(color: Colors.red),
-      //    actionsAppBar: <Widget>[],
+      actionsAppBar: <Widget>[
+        Container(
+          child: IconButton(
+            icon: Icon(
+              Icons.logout,
+              color: kPrimaryColor4,
+            ),
+            onPressed: () {
+              context.read<AuthService>().signOut();
+            },
+          ),
+        ),
+      ],
       //    backgroundColorContent: Colors.blue,
       //    elevationAppBar: 4.0,
       //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
