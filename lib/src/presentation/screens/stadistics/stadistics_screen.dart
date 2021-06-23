@@ -13,6 +13,7 @@ class Stadistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     final firebaseUser = context.watch<User>();
     final Future<List> res = getFeelings(firebaseUser.uid);
     List<charts.Series> todayData;
@@ -71,15 +72,23 @@ class Stadistics extends StatelessWidget {
                           ),
                     Container(
                       height: 400,
-                      padding: EdgeInsets.all(20),
+                      width: size.width * 0.9,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 20, horizontal: size.width * 0.05),
                       child: Card(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: <Widget>[
                               Text(
-                                "Total de emociones detectadas",
+                                "Emociones detectadas en los últimos siete días",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
+                              Divider(),
                               Expanded(
                                 child: DateTimeComboLinePointChart(allData),
                               ),

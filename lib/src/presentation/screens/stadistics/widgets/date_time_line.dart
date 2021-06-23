@@ -9,24 +9,18 @@ class DateTimeComboLinePointChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.TimeSeriesChart(
+    return new charts.BarChart(
       seriesList,
       animate: animate,
-      // Configure the default renderer as a line renderer. This will be used
-      // for any series that does not define a rendererIdKey.
-      //
-      // This is the default configuration, but is shown here for  illustration.
-      defaultRenderer: new charts.LineRendererConfig(),
-      // Custom renderer configuration for the point series.
-      customSeriesRenderers: [
-        new charts.PointRendererConfig(
-            // ID used to link series to this renderer.
-            customRendererId: 'customPoint')
+      barGroupingType: charts.BarGroupingType.grouped,
+      // Add the series legend behavior to the chart to turn on series legends.
+      // By default the legend will display above the chart.
+      behaviors: [
+        new charts.SeriesLegend(
+            // Configures the "Other" series to be hidden on first chart draw.
+            //defaultHiddenSeries: ['Other'],
+            )
       ],
-      // Optionally pass in a [DateTimeFactory] used by the chart. The factory
-      // should create the same type of [DateTime] as the data provided. If none
-      // specified, the default creates local date time.
-      dateTimeFactory: const charts.LocalDateTimeFactory(),
     );
   }
 }
