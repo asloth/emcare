@@ -17,7 +17,9 @@ class Stadistics extends StatelessWidget {
     final Future<List> res = getFeelings(firebaseUser.uid);
     List<charts.Series> todayData;
     List<dynamic> allData;
+    List todayFlag;
     res.then((value) => {
+          todayFlag = value[0],
           todayData = createSampleData(value[0]),
           allData = UserTone.setData(value[1]),
           // print('All data: $allData')
@@ -41,7 +43,32 @@ class Stadistics extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    GroupedBarChart(todayData),
+                    (todayFlag.isNotEmpty)
+                        ? GroupedBarChart(todayData)
+                        : Container(
+                            padding: EdgeInsets.all(20),
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 12.0, horizontal: 8.0),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.sentiment_dissatisfied,
+                                      size: 30,
+                                    ),
+                                    Text(
+                                      'Hoy no hemos detectado ninguna emoción, por favor conversa con el chatbot',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                     Container(
                       height: 400,
                       padding: EdgeInsets.all(20),
