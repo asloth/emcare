@@ -56,7 +56,7 @@ class Analysis extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     TendencyLabel(
-                      score: slope,
+                      label: AnalysisService.getTendencyLabel(slope),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -65,7 +65,7 @@ class Analysis extends StatelessWidget {
                       ),
                     ),
                     RecomendationLabel(
-                      score: slope,
+                      label: AnalysisService.getRecommedation(slope),
                     )
                   ],
                 ),

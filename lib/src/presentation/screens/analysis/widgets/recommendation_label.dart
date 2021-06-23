@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RecomendationLabel extends StatelessWidget {
-  final num score;
+  final String label;
   const RecomendationLabel({
     Key key,
-    this.score,
+    this.label = 's',
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String label = score < 0
-        ? 'Si esto sigue así, por favor ten en cuenta acudir con un profesional de la salud'
-        : 'Felicidades! De todas formas nos mantendremos atentos a tus estados de ánimo';
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 5,

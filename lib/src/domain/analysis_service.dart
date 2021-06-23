@@ -17,4 +17,47 @@ class AnalysisService {
     Map<String, dynamic> res = await json.decode(response.body);
     return res;
   }
+
+  static String getTendencyLabel(num slope) {
+    String label = '';
+    if (slope < 0) {
+      if (slope < -0.1) {
+        label = 'tendencia  negativa';
+      } else {
+        label = 'tendencia ligeramente negativa';
+      }
+    } else if (slope == 0) {
+      label = 'tendencia constante';
+    } else {
+      if (slope < 0.1) {
+        label = 'tendencia ligeramente positiva';
+      } else {
+        label = 'tendencia positiva';
+      }
+    }
+    return label;
+  }
+
+  static String getRecommedation(num slope) {
+    String rec = '';
+    if (slope < 0) {
+      if (slope < -0.1) {
+        rec =
+            'Si esto sigue así, por favor ten en cuenta acudir con un profesional de la salud';
+      } else {
+        rec =
+            'Seguiremos atentos a tus estados de ánimo y te avisaremos si esta tendencia empeora. ';
+      }
+    } else if (slope == 0) {
+      rec = 'tendencia constante';
+    } else {
+      if (slope < 0.1) {
+        rec = 'Parece que mejoraste ligeramente! Esperamos que sigas así';
+      } else {
+        rec =
+            'Felicidades! De todas formas nos mantendremos atentos a tus estados de ánimo';
+      }
+    }
+    return rec;
+  }
 }

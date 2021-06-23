@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TendencyLabel extends StatelessWidget {
-  final num score;
+  final String label;
   const TendencyLabel({
     Key key,
-    this.score,
+    this.label,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String label = score < 0 ? 'tendencia negativa' : 'tendencia positiva';
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 5,
