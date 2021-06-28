@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     items.add(
       ScreenHiddenDrawer(
         ItemHiddenMenu(
-          name: "Análisis",
+          name: "Tendencia",
           baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
           colorLineSelected: kPrimaryColor,
         ),

@@ -10,7 +10,7 @@ class GroupedBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 350,
       padding: EdgeInsets.all(20),
       child: Card(
         child: Padding(
