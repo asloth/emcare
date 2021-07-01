@@ -21,7 +21,7 @@ class AnalysisService {
   static String getTendencyLabel(num slope) {
     String label = '';
     if (slope < 0) {
-      if (slope < -0.1) {
+      if (slope < -0.01) {
         label = 'tendencia  negativa';
       } else {
         label = 'tendencia ligeramente negativa';
@@ -29,7 +29,7 @@ class AnalysisService {
     } else if (slope == 0) {
       label = 'tendencia constante';
     } else {
-      if (slope < 0.1) {
+      if (slope < 0.01) {
         label = 'tendencia ligeramente positiva';
       } else {
         label = 'tendencia positiva';
@@ -41,17 +41,17 @@ class AnalysisService {
   static String getRecommedation(num slope) {
     String rec = '';
     if (slope < 0) {
-      if (slope < -0.1) {
+      if (slope < -0.01) {
         rec =
             'Si esto sigue así, por favor ten en cuenta acudir con un profesional de la salud';
       } else {
         rec =
-            'Seguiremos atentos a tus estados de ánimo y te avisaremos si esta tendencia empeora. ';
+            'Seguiremos atentos a tus estados de ánimo y te avisaremos si esta tendencia decae. ';
       }
     } else if (slope == 0) {
       rec = 'tendencia constante';
     } else {
-      if (slope < 0.1) {
+      if (slope < 0.01) {
         rec = 'Parece que mejoraste ligeramente! Esperamos que sigas así';
       } else {
         rec =

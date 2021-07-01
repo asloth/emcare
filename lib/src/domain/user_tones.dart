@@ -59,26 +59,51 @@ class UserTone {
       new charts.Series<UserTone, String>(
         id: 'Felicidad',
         domainFn: (UserTone sales, _) => sales.day,
-        measureFn: (UserTone sales, _) => sales.score,
+        measureFn: (UserTone sales, _) => sales.score * 100,
         data: hapiness,
+        seriesColor: charts.Color(
+          r: 245,
+          g: 243,
+          b: 0,
+          a: 96,
+        ),
       ),
       new charts.Series<UserTone, String>(
         id: 'Tristeza',
         domainFn: (UserTone sales, _) => sales.day,
-        measureFn: (UserTone sales, _) => sales.score,
+        measureFn: (UserTone sales, _) => sales.score * 100,
         data: sadness,
+        seriesColor: charts.Color(
+          r: 0,
+          g: 161,
+          b: 255,
+          a: 100,
+        ),
       ),
       new charts.Series<UserTone, String>(
         id: 'Enojo',
         domainFn: (UserTone sales, _) => sales.day,
-        measureFn: (UserTone sales, _) => sales.score,
+        measureFn: (UserTone sales, _) => sales.score * 100,
         data: anger,
+        seriesColor: charts.Color(
+          r: 250,
+          g: 53,
+          b: 0,
+          a: 98,
+        ),
       ),
       new charts.Series<UserTone, String>(
-          id: 'Miedo',
-          domainFn: (UserTone sales, _) => sales.day,
-          measureFn: (UserTone sales, _) => sales.score,
-          data: fear),
+        id: 'Miedo',
+        domainFn: (UserTone sales, _) => sales.day,
+        measureFn: (UserTone sales, _) => sales.score * 100,
+        data: fear,
+        seriesColor: charts.Color(
+          r: 20,
+          g: 222,
+          b: 53,
+          a: 87,
+        ),
+      ),
     ];
   }
 }

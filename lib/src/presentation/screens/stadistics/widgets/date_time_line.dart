@@ -10,7 +10,7 @@ class DateTimeComboLinePointChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: 370,
       padding: EdgeInsets.all(20),
       child: Card(
         child: Padding(
@@ -18,7 +18,7 @@ class DateTimeComboLinePointChart extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Emociones detectadas en los últimos siete días",
+                "Emociones detectadas en los últimos siete días \n (24/06/2021 - 01/07/2021) ",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -29,8 +29,13 @@ class DateTimeComboLinePointChart extends StatelessWidget {
               Expanded(
                 child: new charts.BarChart(
                   seriesList,
+                  // rtlSpec: charts.RTLSpec(
+                  //     axisDirection: charts.AxisDirection.normal),
                   animate: animate,
                   barGroupingType: charts.BarGroupingType.grouped,
+                  defaultRenderer: charts.BarLaneRendererConfig(
+                    fillPattern: charts.FillPatternType.forwardHatch,
+                  ),
                   // Add the series legend behavior to the chart to turn on series legends.
                   // By default the legend will display above the chart.
                   behaviors: [
@@ -41,6 +46,9 @@ class DateTimeComboLinePointChart extends StatelessWidget {
                   ],
                 ),
               ),
+              Text(
+                "Y: Intensidad de la emoción, \n X: Día en que se detectó",
+              )
             ],
           ),
         ),

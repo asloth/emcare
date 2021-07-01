@@ -18,7 +18,7 @@ class GroupedBarChart extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Emociones detectadas hoy",
+                "Emociones detectadas hoy ",
               ),
               Expanded(
                 child: new charts.BarChart(
@@ -26,6 +26,9 @@ class GroupedBarChart extends StatelessWidget {
                   animate: animate,
                   barGroupingType: charts.BarGroupingType.grouped,
                 ),
+              ),
+              Text(
+                "Y: Intensidad de la emoción, X: Emoción",
               ),
             ],
           ),

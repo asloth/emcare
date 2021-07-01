@@ -49,25 +49,25 @@ List<charts.Series<TodayUserTone, String>> createSampleData(List response) {
     new charts.Series<TodayUserTone, String>(
       id: 'Felicidad',
       domainFn: (TodayUserTone tone, _) => tone.toneName,
-      measureFn: (TodayUserTone tone, _) => tone.score,
+      measureFn: (TodayUserTone tone, _) => tone.score * 100,
       data: hapiness,
     ),
     new charts.Series<TodayUserTone, String>(
       id: 'Tristeza',
       domainFn: (TodayUserTone tone, _) => tone.toneName,
-      measureFn: (TodayUserTone tone, _) => tone.score,
+      measureFn: (TodayUserTone tone, _) => tone.score * 100,
       data: sadness,
     ),
     new charts.Series<TodayUserTone, String>(
       id: 'Enojo',
       domainFn: (TodayUserTone tone, _) => tone.toneName,
-      measureFn: (TodayUserTone tone, _) => tone.score,
+      measureFn: (TodayUserTone tone, _) => tone.score * 100,
       data: anger,
     ),
     new charts.Series<TodayUserTone, String>(
       id: 'Miedo',
       domainFn: (TodayUserTone tone, _) => tone.toneName,
-      measureFn: (TodayUserTone tone, _) => tone.score,
+      measureFn: (TodayUserTone tone, _) => tone.score * 100,
       data: fear,
     ),
   ];
