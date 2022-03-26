@@ -68,7 +68,7 @@ class _SignUpFormState extends State<SignUpForm> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             LoginTitle(
-              title: 'Registrate',
+              title: 'Regístrate',
             ),
             InputField(
               hintText: 'Nombre',

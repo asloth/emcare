@@ -2,7 +2,6 @@ import 'package:emcare/src/presentation/screens/login/widgets/hero.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/sign_in_form.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/sign_up_form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({Key key}) : super(key: key);
@@ -38,7 +37,7 @@ class SignInBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   LoginHero(
-                    assetdir: 'assets/imgs/welcome.svg',
+                    assetdir: 'assets/imgs/welcome.png',
                   ),
                   SignInForm(),
                 ],
@@ -47,7 +46,7 @@ class SignInBody extends StatelessWidget {
           : Row(
               children: [
                 LoginHero(
-                  assetdir: 'assets/imgs/welcome.svg',
+                  assetdir: 'assets/imgs/welcome.png',
                 ),
                 Flexible(
                   child: SignInForm(),
@@ -72,11 +71,8 @@ class SignUpBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                'assets/imgs/note_taking_isometric.svg',
-              ),
+            LoginHero(
+              assetdir: 'assets/imgs/note_taking_isometric.png',
             ),
             SignUpForm(),
           ],

@@ -25,33 +25,50 @@ class UserTone {
     return 'nosé';
   }
 
+  static Map getMaxEmotion(Map tones){
+    Map maxEmotion = {'emotion': '', 'maxScore': 0.0 };
+    tones.forEach((k,v) => {
+      if (v>maxEmotion['maxScore']){
+        maxEmotion['emotion'] = k,
+        maxEmotion['maxScore'] = v
+      }
+    });
+    return maxEmotion;
+  }
+
   /// Create one series with sample hard coded data.
   static List<charts.Series<UserTone, String>> setData(List response) {
     List<UserTone> hapiness = [];
     List<UserTone> sadness = [];
     List<UserTone> anger = [];
     List<UserTone> fear = [];
+    List<UserTone> love = [];
+    List<UserTone> surprise = [];
     DateTime today = DateTime.now();
     DateTime flag = today.subtract(Duration(days: 7));
 
     for (var e in response) {
+      print(e);
       Map element = Map.from(e);
       int timestamp = element['date']['_seconds'];
       DateTime eDate = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-      var tones = element['sentiment']['document_tone']['tones'];
+      var tones = element['sentiment'];
       if (eDate.isAfter(flag)) {
         String wekday = getDay(eDate.weekday);
-        for (var t in tones) {
-          if (t['tone_id'] == 'sadness') {
-            sadness.add(new UserTone(wekday, t['score']));
-          } else if (t['tone_id'] == 'joy') {
-            hapiness.add(new UserTone(wekday, t['score']));
-          } else if (t['tone_id'] == 'anger') {
-            anger.add(new UserTone(wekday, t['score']));
-          } else if (t['tone_id'] == 'fear') {
-            fear.add(new UserTone(wekday, t['score']));
+        Map dayEmotion = getMaxEmotion(tones);
+          if (dayEmotion['emotion'] == 'sad') {
+            sadness.add(new UserTone(wekday, dayEmotion['maxScore']));
+          } else if (dayEmotion['emotion'] == 'joy') {
+            hapiness.add(new UserTone(wekday, dayEmotion['maxScore']));
+          } else if (dayEmotion['emotion'] == 'anger') {
+            anger.add(new UserTone(wekday, dayEmotion['maxScore']));
+          } else if (dayEmotion['emotion'] == 'fear') {
+            fear.add(new UserTone(wekday, dayEmotion['maxScore']));
+          }else if (dayEmotion['emotion'] == 'love'){
+            love.add(new UserTone(wekday, dayEmotion['maxScore']));
+          } else if (dayEmotion['emotion'] == 'surprise'){
+            surprise.add(new UserTone(wekday, dayEmotion['maxScore']));
           }
-        }
       }
     }
 
@@ -102,6 +119,30 @@ class UserTone {
           g: 222,
           b: 53,
           a: 87,
+        ),
+      ),
+      new charts.Series<UserTone, String>(
+        id: 'Amor',
+        domainFn: (UserTone sales, _) => sales.day,
+        measureFn: (UserTone sales, _) => sales.score * 100,
+        data: love,
+        seriesColor: charts.Color(
+          r: 42,
+          g: 219,
+          b: 208,
+          a: 86,
+        ),
+      ),
+      new charts.Series<UserTone, String>(
+        id: 'Sorpresa',
+        domainFn: (UserTone sales, _) => sales.day,
+        measureFn: (UserTone sales, _) => sales.score * 100,
+        data: surprise,
+        seriesColor: charts.Color(
+          r: 182,
+          g: 1,
+          b: 137,
+          a: 71,
         ),
       ),
     ];

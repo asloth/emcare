@@ -18,7 +18,7 @@ class DateTimeComboLinePointChart extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Emociones detectadas en los últimos siete días \n (24/06/2021 - 01/07/2021) ",
+                "Emociones detectadas en los últimos siete días ",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -40,6 +40,8 @@ class DateTimeComboLinePointChart extends StatelessWidget {
                   // By default the legend will display above the chart.
                   behaviors: [
                     new charts.SeriesLegend(
+                      desiredMaxColumns: 3,
+                      position: charts.BehaviorPosition.start,
                         // Configures the "Other" series to be hidden on first chart draw.
                         //defaultHiddenSeries: ['Other'],
                         )

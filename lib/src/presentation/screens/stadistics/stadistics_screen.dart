@@ -25,7 +25,7 @@ class Stadistics extends StatelessWidget {
           lastSevenDaysFlag = value[1],
           todayData = createSampleData(value[0]),
           allData = UserTone.setData(value[1]),
-          // print('All data: $allData')
+          print('All data: $allData')
         });
     return FutureBuilder(
       future: res,

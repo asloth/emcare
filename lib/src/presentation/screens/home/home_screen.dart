@@ -5,8 +5,6 @@ import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'package:hidden_drawer_menu/model/item_hidden_menu.dart';
-import 'package:hidden_drawer_menu/model/screen_hidden_drawer.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {

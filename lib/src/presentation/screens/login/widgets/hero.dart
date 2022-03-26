@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginHero extends StatelessWidget {
   final String assetdir;
@@ -15,8 +14,8 @@ class LoginHero extends StatelessWidget {
         horizontal: 30,
         vertical: 10,
       ),
-      child: SvgPicture.asset(
-        assetdir,
+      child: Image(
+        image: AssetImage(assetdir),
       ),
     );
   }

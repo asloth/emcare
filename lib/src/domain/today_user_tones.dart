@@ -28,20 +28,31 @@ List<charts.Series<TodayUserTone, String>> createSampleData(List response) {
   List<TodayUserTone> sadness = [];
   List<TodayUserTone> anger = [];
   List<TodayUserTone> fear = [];
+  List<TodayUserTone> love = [];
+  List<TodayUserTone> surprise = [];
 
   for (var e in response) {
     Map element = Map.from(e);
-    var tones = element['sentiment']['document_tone']['tones'];
-    for (var t in tones) {
-      if (t['tone_id'] == 'sadness') {
-        sadness.add(new TodayUserTone('Tristeza', t['score']));
-      } else if (t['tone_id'] == 'joy') {
-        hapiness.add(new TodayUserTone('Felicidad', t['score']));
-      } else if (t['tone_id'] == 'anger') {
-        anger.add(new TodayUserTone('Enojo', t['score']));
-      } else if (t['tone_id'] == 'fear') {
-        fear.add(new TodayUserTone('Miedo', t['score']));
+    Map tones = element['sentiment'];
+    Map todayEmotion = {'emotion': '', 'maxScore': 0.0 };
+    tones.forEach((k,v) => {
+      if (v>todayEmotion['maxScore']){
+        todayEmotion['emotion'] = k,
+        todayEmotion['maxScore'] = v
       }
+    });
+    if (todayEmotion['emotion'] == 'sad') {
+      sadness.add(new TodayUserTone('Tristeza', todayEmotion['maxScore']));
+    } else if (todayEmotion['emotion'] == 'joy') {
+      hapiness.add(new TodayUserTone('Felicidad', todayEmotion['maxScore']));
+    } else if (todayEmotion['emotion'] == 'anger') {
+      anger.add(new TodayUserTone('Enojo', todayEmotion['maxScore']));
+    } else if (todayEmotion['emotion'] == 'fear') {
+      fear.add(new TodayUserTone('Miedo', todayEmotion['maxScore']));
+    } else if (todayEmotion['emotion'] == 'love'){
+      love.add(new TodayUserTone('Amor', todayEmotion['maxScore']));
+    } else if (todayEmotion['emotion'] == 'surprise'){
+      surprise.add(new TodayUserTone('Sorpresa', todayEmotion['maxScore']));
     }
   }
 
@@ -69,6 +80,18 @@ List<charts.Series<TodayUserTone, String>> createSampleData(List response) {
       domainFn: (TodayUserTone tone, _) => tone.toneName,
       measureFn: (TodayUserTone tone, _) => tone.score * 100,
       data: fear,
+    ),
+    new charts.Series<TodayUserTone, String>(
+      id: 'Amor',
+      domainFn: (TodayUserTone tone, _) => tone.toneName,
+      measureFn: (TodayUserTone tone, _) => tone.score * 100,
+      data: love,
+    ),
+    new charts.Series<TodayUserTone, String>(
+      id: 'Sorpresa',
+      domainFn: (TodayUserTone tone, _) => tone.toneName,
+      measureFn: (TodayUserTone tone, _) => tone.score * 100,
+      data: surprise,
     ),
   ];
 }

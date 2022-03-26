@@ -32,7 +32,10 @@ dependencies:
   http: ^0.12.2
   intl: ^0.16.1
   provider: ^5.0.0
-  charts_flutter: ^0.10.0
+  charts_flutter:
+    git:
+      url: https://github.com/google/charts.git
+      path: charts_flutter
   url_launcher: ^6.0.4
 
 dev_dependencies:

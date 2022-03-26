@@ -38,7 +38,7 @@ class _ChatState extends State<Chat> {
       }
     }
 
-    var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/ibm');
+    var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/emotion');
     var response = await http.post(
       url,
       body: {
