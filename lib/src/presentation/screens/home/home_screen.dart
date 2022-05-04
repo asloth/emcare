@@ -1,6 +1,5 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
-import 'package:emcare/src/presentation/screens/analysis/analysis_screen.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
 import 'package:flutter/material.dart';
@@ -38,17 +37,6 @@ class _HomeState extends State<Home> {
           colorLineSelected: kPrimaryColor,
         ),
         Stadistics(),
-      ),
-    );
-
-    items.add(
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-          name: "Tendencia",
-          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
-          colorLineSelected: kPrimaryColor,
-        ),
-        Analysis(),
       ),
     );
 
