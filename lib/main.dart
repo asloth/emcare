@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
             title: 'EmCare',
+            debugShowCheckedModeBanner: false,
             home: MultiProvider(
               providers: [
                 Provider(create: (_) => AuthService(FirebaseAuth.instance)),
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
               ],
               child: MaterialApp(
                 title: 'EmCare',
+                debugShowCheckedModeBanner: false,
                 home: AuthenticationWrapper(),
               ),
             ),

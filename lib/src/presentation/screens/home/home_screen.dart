@@ -1,6 +1,7 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
+import 'package:emcare/src/presentation/screens/perfil/history_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
@@ -40,16 +41,16 @@ class _HomeState extends State<Home> {
       ),
     );
 
-    // items.add(
-    //   ScreenHiddenDrawer(
-    //     ItemHiddenMenu(
-    //       name: "Perfil",
-    //       baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
-    //       colorLineSelected: kPrimaryColor,
-    //     ),
-    //     Perfil(),
-    //   ),
-    // );
+    items.add(
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+          name: "Historial",
+          baseStyle: TextStyle(color: kBackgroundColor2, fontSize: fontS),
+          colorLineSelected: kPrimaryColor,
+        ),
+        History(),
+      ),
+    );
 
     super.initState();
   }

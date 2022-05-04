@@ -28,7 +28,7 @@ class GroupedBarChart extends StatelessWidget {
                 ),
               ),
               Text(
-                "Y: Intensidad de la emoción, X: Emoción",
+                "Y: Probabilidad de la emoción, X: Emoción",
               ),
             ],
           ),

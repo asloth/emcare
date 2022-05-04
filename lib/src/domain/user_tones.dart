@@ -1,4 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/material.dart';
 
 class UserTone {
   final String day;
@@ -147,4 +148,45 @@ class UserTone {
       ),
     ];
   }
+
+  static List<DataRow> setHistory(List response){
+    List<DataRow> rows = [];
+    for (var e in response){
+      Map element = Map.from(e);
+      int timestamp = element['date']['_seconds'];
+      DateTime eDate = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+      var tones = element['sentiment'];
+      Map dayEmotion = getMaxEmotion(tones);
+      String emotion= emotionInSpanish(dayEmotion['emotion']);
+      rows.add(
+        new DataRow(
+          cells: <DataCell>[
+            new DataCell(Text(eDate.toIso8601String().substring(0,10))),
+            new DataCell(Text(emotion)),
+            new DataCell(Text((dayEmotion['maxScore']*100).toStringAsFixed(2)+' %')),
+          ],
+        ),
+      );
+    }
+    return rows;
+  }
+
+  static String emotionInSpanish(String englishName){
+    if (englishName =='joy'){
+      return 'Alegría';
+    }else if (englishName=='anger'){
+      return 'Enojo';
+    }else if (englishName=='sad'){
+      return 'Tristeza';
+    }else if (englishName=='love'){
+      return 'Amor';
+    }else if (englishName=='fear'){
+      return 'Miedo';
+    }else if (englishName=='surprise'){
+      return 'Sorpresa';
+    }
+    return '';
+  }
+
+
 }
