@@ -1,9 +1,9 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
 import 'package:emcare/src/domain/user.dart';
-import 'package:emcare/src/presentation/components/input_field.dart';
 import 'package:emcare/src/presentation/components/round_button.dart';
 import 'package:emcare/src/presentation/screens/perfil/components/perfil_input.dart';
+import 'package:emcare/src/presentation/screens/perfil/components/update-name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +68,12 @@ class Perfil extends StatelessWidget {
             ),
             RoundButton(
               insideText: 'Cambiar nombre',
+              customFunction: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UpdateNameForm()),
+                );
+              },
             ),
             RoundButton(
               insideText: 'Cambiar contraseña',

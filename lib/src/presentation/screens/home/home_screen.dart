@@ -1,12 +1,10 @@
 import 'package:emcare/constants.dart';
-import 'package:emcare/src/domain/auth_service.dart';
 import 'package:emcare/src/presentation/screens/chat/chat_screen.dart';
 import 'package:emcare/src/presentation/screens/history/history_screen.dart';
 import 'package:emcare/src/presentation/screens/perfil/perfil_screen.dart';
 import 'package:emcare/src/presentation/screens/stadistics/stadistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);

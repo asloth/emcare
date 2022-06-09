@@ -18,7 +18,7 @@ class AuthService {
     String password,
   }) async {
     try {
-      UserCredential userCredentials = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
