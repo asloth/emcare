@@ -1,5 +1,6 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
+import 'package:emcare/src/domain/user.dart';
 import 'package:emcare/src/presentation/components/custom-alert-dialog.dart';
 import 'package:emcare/src/presentation/components/input_field.dart';
 import 'package:emcare/src/presentation/screens/login/widgets/already_have_an_account_check.dart';

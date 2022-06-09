@@ -16,7 +16,13 @@ class History extends StatelessWidget {
     final Future<List> res = getFeelings(firebaseUser.uid);
     res.then((value) => {
       allData = UserTone.setHistory(value[1]),
-      
+      allData.sort(((a, b) {
+         Text awidget = a.cells.first.child ;
+         String adate = awidget.data;
+         Text bwidget = b.cells.first.child;
+         String bdate = bwidget.data;
+         return -adate.compareTo(bdate);
+      }))
     });
 
 
@@ -36,20 +42,20 @@ class History extends StatelessWidget {
             backgroundColor: kBackgroundColor,
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: Text('Historial de emociones',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontS,
-                    )),
-                  ),
-                  SingleChildScrollView(
-                    child: DataTable(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: Text('Historial de emociones',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontS,
+                      )),
+                    ),
+                    DataTable(
                       columns: const <DataColumn>[
                         DataColumn(
                           label: Text(
@@ -71,9 +77,9 @@ class History extends StatelessWidget {
                         ),
                       ], 
                       rows: allData,
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           );

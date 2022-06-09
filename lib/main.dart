@@ -1,5 +1,6 @@
 import 'package:emcare/constants.dart';
 import 'package:emcare/src/domain/auth_service.dart';
+import 'package:emcare/src/domain/user.dart';
 import 'package:emcare/src/presentation/screens/home/home_screen.dart';
 import 'package:emcare/src/presentation/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
                   create: (context) =>
                       context.read<AuthService>().authStateChanges,
                   initialData: null,
-                )
+                ),
               ],
               child: MaterialApp(
                 title: 'EmCare',

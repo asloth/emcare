@@ -8,3 +8,4 @@ const kSecondColor = Color(0xFFF82424);
 const kBackgroundColor = Color(0xFFEFEFEF);
 const kBackgroundColor2 = Color(0xFFFFFFFF);
 const kTextColor = Color(0xFF00000);
+const api_url = 'https://emcare-api.vercel.app/';

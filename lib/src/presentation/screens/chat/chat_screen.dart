@@ -18,9 +18,10 @@ class _ChatState extends State<Chat> {
   final messageInsert = TextEditingController();
   List<Map> messsages = [];
   bool flag = false;
+  
 
   void response(query) async {
-    List qresult = await getResponse(query);
+    List qresult = await getResponse(query, api_url);
     if (qresult.first['intentDisplayName'] == 'SegundaPregunta') {
       setState(() {
         flag = true;
@@ -29,7 +30,7 @@ class _ChatState extends State<Chat> {
     printMessages(qresult);
   }
 
-  Future<void> setFeeling(List<Map> messages, userId) async {
+  Future<void> setFeeling(List<Map> messages, userId, String url) async {
     String userMessages = "";
     for (var e in messages) {
       if (e['data'] == 1) {
@@ -38,9 +39,9 @@ class _ChatState extends State<Chat> {
       }
     }
 
-    var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/emotion');
+    var endpoint = Uri.parse(url + 'emotion');
     var response = await http.post(
-      url,
+      endpoint,
       body: {
         'message': userMessages,
         'userid': userId,
@@ -49,10 +50,10 @@ class _ChatState extends State<Chat> {
     print(response.body);
   }
 
-  Future<List> getResponse(queryText) async {
-    var url = Uri.parse('https://emcare-expressjs-api.herokuapp.com/dialog');
+  Future<List> getResponse(queryText, String url) async {
+    var endpoint = Uri.parse(url+'dialog');
     var response = await http.post(
-      url,
+      endpoint,
       body: {
         'message': queryText,
       },
@@ -141,7 +142,7 @@ class _ChatState extends State<Chat> {
                     });
                     if (flag) {
                       response('auto');
-                      setFeeling(messsages, firebaseUser.uid);
+                      setFeeling(messsages, firebaseUser.uid, api_url);
                       setState(() {
                         flag = false;
                       });

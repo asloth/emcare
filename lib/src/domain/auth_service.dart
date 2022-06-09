@@ -1,3 +1,4 @@
+import 'package:emcare/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,10 +18,11 @@ class AuthService {
     String password,
   }) async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      UserCredential userCredentials = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      
       return 'Signed in';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
@@ -73,7 +75,7 @@ class AuthService {
     print(userName);
     try {
       var url =
-          Uri.parse('https://emcare-expressjs-api.herokuapp.com/new-user');
+          Uri.parse(api_url+'new-user');
       await http.post(
         url,
         body: {

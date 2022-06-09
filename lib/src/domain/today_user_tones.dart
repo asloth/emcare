@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:emcare/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:charts_flutter/flutter.dart' as charts;
 
 Future<List> getFeelings(String userid) async {
-  var url =
-      Uri.parse('https://emcare-expressjs-api.herokuapp.com/get-sentiment');
+  var url = Uri.parse(api_url+'get-sentiment');
   var response = await http.post(
     url,
     body: {
