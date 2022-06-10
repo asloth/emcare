@@ -29,7 +29,7 @@ class MyUser {
     }    
   }
 
-  Future<String> updateUserName(String userid, String newname) async{
+  static Future<String> updateUserName(String userid, String newname) async{
     String message;
     try {
       var endpoint = Uri.parse(api_url + 'update-user');
@@ -42,7 +42,7 @@ class MyUser {
         }
       );
       if (response.statusCode == 200){
-        message = 'Actualizado correctamenta';
+        message = 'Actualizado correctamente';
       }
     } catch (e) {
       message = 'Ocurrió un problema al actualizar el nombre';
@@ -51,7 +51,7 @@ class MyUser {
     return message;
   }
 
-  Future<String> updatePassword(String newPassword, User firebaseU) async{
+  static Future<String> updatePassword(String newPassword, User firebaseU) async{
     String message;
     try {
       firebaseU.updatePassword(newPassword);

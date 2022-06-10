@@ -8,19 +8,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Perfil extends StatelessWidget {
+class Perfil extends StatefulWidget {
   const Perfil({ Key key }) : super(key: key);
 
+  @override
+  State<Perfil> createState() => _PerfilState();
+}
+
+class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
     final fontS = 25.0;
     String userName;
     MyUser currentUserData = new MyUser();
-    final Future<Map> userData = (currentUserData.getUser(firebaseUser.uid));
-    userData.then((value) {
-      userName = value['name'];
-    });
+    Future<Map> userData = (currentUserData.getUser(firebaseUser.uid));
+      userData.then((value) {
+        userName = value['name'];
+      });
     
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -69,10 +74,11 @@ class Perfil extends StatelessWidget {
             RoundButton(
               insideText: 'Cambiar nombre',
               customFunction: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UpdateNameForm()),
-                );
+                Navigator.of(context).push(
+                  new MaterialPageRoute(builder: (_) => UpdateNameForm()),
+                ).then((value) => value? setState((){
+                  userData = (currentUserData.getUser(firebaseUser.uid));
+                }):null ) ;
               },
             ),
             RoundButton(
