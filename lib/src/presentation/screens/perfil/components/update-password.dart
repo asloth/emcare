@@ -1,5 +1,4 @@
 import 'package:emcare/constants.dart';
-import 'package:emcare/src/domain/user.dart';
 import 'package:emcare/src/presentation/components/custom-alert-dialog.dart';
 import 'package:emcare/src/presentation/components/input_field.dart';
 import 'package:emcare/src/presentation/components/round_button.dart';
@@ -7,18 +6,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UpdateNameForm extends StatefulWidget {
-  const UpdateNameForm({ Key key }) : super(key: key);
+
+class UpdatePasswordScreen extends StatefulWidget {
+  const UpdatePasswordScreen({ Key key }) : super(key: key);
 
   @override
-  State<UpdateNameForm> createState() => _UpdateNameFormState();
+  State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
 }
 
-class _UpdateNameFormState extends State<UpdateNameForm> {
-    final _formKey = GlobalKey<FormState>();
-    final TextEditingController newNameController = TextEditingController();
-    
-    String message;
+class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController newPasswordController2 = TextEditingController();
+  String message;
+
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
@@ -35,11 +36,23 @@ class _UpdateNameFormState extends State<UpdateNameForm> {
         },
       );
     }
-    
+
+    Future<void> _updating() {
+      try {
+        firebaseUser.updatePassword(newPasswordController.text);
+        _showMyDialog('Actualizacion correcta');
+        Navigator.pop(context);
+        
+      } on FirebaseAuthException catch (e) {
+        _showMyDialog(e.message);
+
+      }
+    }
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        title: Text("Actualizar nombre"),
+        title: Text("Actualizar clave"),
         backgroundColor: kPrimaryColor,
       ),
       body: Form(
@@ -50,9 +63,16 @@ class _UpdateNameFormState extends State<UpdateNameForm> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               InputField(
-                hintText: 'Ingrese el nuevo nombre',
-                icon: Icons.person,
-                controller: newNameController,
+                hintText: 'Nueva clave',
+                icon: Icons.lock ,
+                controller: newPasswordController,
+                secretField: true,
+              ),
+              InputField(
+                hintText: 'Confirmar nueva clave',
+                icon: Icons.lock_reset,
+                controller: newPasswordController2,
+                secretField: true,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -67,16 +87,14 @@ class _UpdateNameFormState extends State<UpdateNameForm> {
                     ),
                   ),
                   onPressed: () async => {
-                    if (_formKey.currentState.validate())
-                      {
-                        message =await  MyUser.updateUserName(firebaseUser.uid, newNameController.text),
-                        _showMyDialog(message),
-                        if (message == 'Actualizado correctamente'){
-                          newNameController.text = '',
-                          Navigator.pop(context, true)
-                        }
-
-                      }
+                    if (newPasswordController.text != newPasswordController2.text){
+                      _showMyDialog('Las claves ingresadas no coninciden'),
+                      newPasswordController.clear(),
+                      newPasswordController2.clear(),
+                    },
+                    if (_formKey.currentState.validate()){
+                      _updating(),
+                    }
                   },
                   child: Text(
                     'CAMBIAR',
@@ -89,12 +107,12 @@ class _UpdateNameFormState extends State<UpdateNameForm> {
               RoundButton(
                 insideText: 'Cancelar',
                 customFunction: (){
-                  Navigator.pop(context, false);
+                  Navigator.pop(context);
                 },
               ),
             ],
           ),
-        ),
+        )
       ),
     );
   }
