@@ -4,4 +4,4 @@ App mobile for keep track of your emotions
 
 ## Interfaces
 
-![[assets/interfaces/chat.jpg]]
+![[https://github.com/asloth/emcare/blob/master/assets/interfaces/chat.jpg]]
