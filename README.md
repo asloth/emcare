@@ -4,6 +4,6 @@ App mobile for keep track of your emotions
 
 ## Interfaces
 
-![login](/assets/interfaces/login.jpg)
-![signup](/assets/interfaces/codigo-daniel-presencial.jpg)
-![chat](/assets/interfaces/chat.jpg)
+![login](/interfaces/login.jpg){width=250}
+![signup](/interfaces/signup.jpg){width=250}
+![chat](/interfaces/chat.jpg){width=250}
