@@ -2,6 +2,11 @@
 
 App mobile for keep track of your emotions
 
+## Services
+<b>Backend: </b> [emcare-nodejs-api](https://github.com/asloth/emcare-nodejs-api)
+
+<b>Administration page:</b> [emcare-react-web](https://github.com/asloth/emcare-react-web)
+
 ## Interfaces
 <div>
 <img src="/interfaces/login.jpg"  width="300" height="600">
